@@ -142,3 +142,5 @@ function sortStack(stack) {
     }
     return workingStack;
 }
+
+module.exports = Stack;
