@@ -57,3 +57,88 @@ function isEmpty(stack) {
 }
 
 //Check for palindromes using a stack
+//start with provided code
+
+function is_palindrome(s) {
+    s = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+    // Your code goes here
+    const tStack = new Stack();
+    let reverseString = '';
+    for (let i = 0; i < s.length; i++) {
+        tStack.push(s[i]);
+    }
+    while (tStack.top !== null) {
+        reverseString += tStack.pop();
+    }
+    return reverseString;
+}
+
+// True, true, true, false
+console.log(is_palindrome("dad"));
+console.log(is_palindrome("A man, a plan, a canal: Panama"));
+console.log(is_palindrome("1001"));
+console.log(is_palindrome("Tauhida"));
+
+
+//matching parentheses in an expression
+function checkBracks(str) {
+    const testStack = new Stack();
+
+    for (let i = 0; i < str.length; i++) {
+        //loop starts
+        if (str[i] === '(' || str[i] === '[' || str[i] === '{') {
+            testStack.push(str[i]);
+        }
+    }
+
+    console.log(JSON.stringify(testStack, null, 2));
+    //while j is less than length
+    let j = 0;
+    while (j < str.length) {
+        if (str[j] === ')' || str[j] === ']' || str[j] === '}') {
+            testStack.pop();
+        }
+        j++;
+    }
+
+    console.log(JSON.stringify(testStack, null, 2));
+
+    if (testStack.top === null) {
+        return true;
+        //else false
+    } else {
+        return false;
+    }
+}
+
+console.log(checkBracks('(([{}]))'));
+
+// sort stack
+//make smallest items on the top 
+//can only use additional stack, not array or linked list
+function sortStack(stack) {
+    //make working stack new stack
+    let workingStack = new Stack;
+    let currentNode;
+
+    //pop  input
+    workingStack.push(stack.pop());
+
+    while (!isEmpty(stack)) {
+        currentNode = stack.pop();
+
+        if (isEmpty(workingStack)) {
+            workingStack.push(currentNode);
+        }
+
+        if (peek(workingStack) < currentNode) {
+            stack.push(workingStack.pop());
+            workingStack.push(currentNode);
+        }
+        else {
+            workingStack.push(currentNode);
+        }
+
+    }
+    return workingStack;
+}
